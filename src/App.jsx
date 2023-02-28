@@ -11,14 +11,7 @@ export default function App() {
     <AuthenticationProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            index
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+          <Route index element={<ProtectedRoute children={<Home />} />} />
 
           <Route path="/Account/Login" element={<Login />} />
         </Routes>
