@@ -6,6 +6,8 @@ import Login from "./pages/login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthenticationProvider from "./providers/AuthenticationProvider";
 
+import "./App.css";
+
 export default function App() {
   return (
     <AuthenticationProvider>

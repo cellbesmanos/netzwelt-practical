@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { authenticationContext } from "../providers/AuthenticationProvider";
 import loginUser from "../services/loginUser";
+
+import "./Login.css";
 
 export default function Login() {
   const [user, setUser] = useContext(authenticationContext);
@@ -33,11 +36,11 @@ export default function Login() {
   }
 
   return (
-    <div>
-      {error ? <div>{error}</div> : null}
+    <div className="Login">
+      <form className="Login__form" onSubmit={handleSubmit}>
+        {error ? <div className="Login_error">{error}</div> : null}
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">
+        <label className="Login__input" htmlFor="username">
           <input
             id="username"
             type="text"
@@ -48,7 +51,7 @@ export default function Login() {
           />
         </label>
 
-        <label htmlFor="password">
+        <label className="Login__input" htmlFor="password">
           <input
             id="password"
             type="text"
@@ -59,7 +62,9 @@ export default function Login() {
           />
         </label>
 
-        <button type="submit">Log In</button>
+        <button className="Login__submit" type="submit">
+          Log In
+        </button>
       </form>
     </div>
   );
