@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authenticationContext } from "../providers/AuthenticationProvider";
 import loginUser from "../services/loginUser";
 
 export default function Login() {
   const [user, setUser] = useContext(authenticationContext);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,44 +15,52 @@ export default function Login() {
   }, [user]);
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+      const formData = new FormData(e.currentTarget);
 
-    const username = formData.get("username");
-    const password = formData.get("password");
+      const username = formData.get("username");
+      const password = formData.get("password");
 
-    const user = await loginUser(username, password);
+      const user = await loginUser(username, password);
 
-    setUser(user);
-    navigate("/");
+      setUser(user);
+      navigate("/");
+    } catch (error) {
+      setError(error);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">
-        <input
-          id="username"
-          type="text"
-          placeholder="Enter your username"
-          name="username"
-          max={16}
-          required
-        />
-      </label>
+    <div>
+      {error ? <div>{error}</div> : null}
 
-      <label htmlFor="password">
-        <input
-          id="password"
-          type="text"
-          placeholder="Enter your password"
-          name="password"
-          max={16}
-          required
-        />
-      </label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username">
+          <input
+            id="username"
+            type="text"
+            placeholder="Enter your username"
+            name="username"
+            max={16}
+            required
+          />
+        </label>
 
-      <button type="submit">Log In</button>
-    </form>
+        <label htmlFor="password">
+          <input
+            id="password"
+            type="text"
+            placeholder="Enter your password"
+            name="password"
+            max={16}
+            required
+          />
+        </label>
+
+        <button type="submit">Log In</button>
+      </form>
+    </div>
   );
 }
