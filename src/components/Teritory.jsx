@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function Teritory({ children }) {
+import arrowDown from "../assets/caret-down-outline.svg";
+import arrowForward from "../assets/caret-forward-outline.svg";
+
+export default function Teritory({ name, children }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  function handleOpenSubTeritories(e) {
+    e.stopPropagation();
+
+    setIsOpen((prev) => !prev);
+  }
+
   return (
-    <ul>
-      {children.map((c) => (
-        <div key={c.id}>
-          <li>{c.name}</li>
+    <div onClick={handleOpenSubTeritories}>
+      <p>
+        {children && (
+          <span
+            style={{
+              display: "inline-block",
+              marginInlineEnd: "4px",
+              width: "16px",
+              aspectRatio: "1",
+            }}
+          >
+            <img
+              style={{ maxWidth: "100%", verticalAlign: "middle" }}
+              src={isOpen ? arrowDown : arrowForward}
+              aria-hidden={true}
+            />
+          </span>
+        )}
+        {name}
+      </p>
 
-          {c.children && <Teritory children={c.children} />}
-        </div>
-      ))}
-    </ul>
+      {isOpen && <div>{children}</div>}
+    </div>
   );
 }
