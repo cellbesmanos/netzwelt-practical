@@ -1,11 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authenticationContext } from "../providers/AuthenticationProvider";
 import loginUser from "../services/loginUser";
 
 export default function Login() {
-  const [_, setUser] = useContext(authenticationContext);
+  const [user, setUser] = useContext(authenticationContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   async function handleSubmit(e) {
     e.preventDefault();
