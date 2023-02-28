@@ -8,7 +8,7 @@ export default function Home() {
   const teritories = useMemo(() => extractTeritories(data), [data]);
 
   return (
-    <main>
+    <main style={{ padding: "64px 32px" }}>
       <header>
         <h1>Teritories</h1>
         <p>Here are the list of teritories</p>
