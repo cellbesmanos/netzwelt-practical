@@ -11,6 +11,7 @@ export default function Login() {
   const [user, setUser] = useContext(authenticationContext);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +26,8 @@ export default function Login() {
     try {
       e.preventDefault();
 
+      setHasSubmitted(true);
+
       const formData = new FormData(e.currentTarget);
 
       const username = formData.get("username");
@@ -36,8 +39,8 @@ export default function Login() {
       persistUser(user);
       navigate("/");
     } catch (error) {
-      setError(error);
-      console.log(error);
+      setError(error.message);
+      setHasSubmitted(false);
     }
   }
 
@@ -69,7 +72,11 @@ export default function Login() {
             />
           </label>
 
-          <button className="Login__submit" type="submit">
+          <button
+            disabled={hasSubmitted}
+            className="Login__submit"
+            type="submit"
+          >
             Log In
           </button>
         </form>

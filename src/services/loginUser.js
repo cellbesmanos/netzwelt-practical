@@ -1,34 +1,17 @@
+import axios from "axios";
+
 export default async function (username, password) {
   try {
-    if (username === "foo" && password === "bar") {
-      return Promise.resolve({
-        username: "foo",
-        displayName: "Foo Bar Foo",
-        roles: ["basic-user"],
-      });
-    } else {
-      return Promise.reject("Invalid username or password.");
-    }
+    const res = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/api/Account/Signin`,
+      {
+        username,
+        password,
+      }
+    );
+
+    return await res.data;
   } catch (error) {
-    throw error;
+    throw new Error(error.response.data.message);
   }
 }
-
-// use this after fixing cors errors
-
-// const res = await fetch(
-//   "https://netzwelt-devtest.azurewebsites.net/Account/SignIn",
-//   {
-//     method: "POST",
-//     body: {
-//       username,
-//       password,
-//     },
-//     headers: {
-//       "Content-Type": "application/json",
-//       accept: "text/plain",
-//     },
-//   }
-// );
-
-// return res.json();

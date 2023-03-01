@@ -47,3 +47,7 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.Login__submit[disabled] {
+  cursor: not-allowed;
+}
