@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { authenticationContext } from "../../providers/AuthenticationProvider";
 import loginUser from "../../services/loginUser";
+import setPeristenceCookie from "../../utils/setUserPeristence";
 
 import "./Login.css";
 
@@ -29,17 +30,17 @@ export default function Login() {
       const user = await loginUser(username, password);
 
       setUser(user);
+      setPeristenceCookie(user);
       navigate("/");
     } catch (error) {
       setError(error);
+      console.log(error);
     }
   }
 
   return (
     <div className="Login">
       <form className="Login__form" onSubmit={handleSubmit}>
-        {error ? <div className="Login_error">{error}</div> : null}
-
         <label className="Login__input" htmlFor="username">
           <input
             id="username"
