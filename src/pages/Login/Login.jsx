@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { authenticationContext } from "../../providers/AuthenticationProvider";
 import loginUser from "../../services/loginUser";
-import setPeristenceCookie from "../../utils/setUserPeristence";
+import { persistUser } from "../../utils/userPeristence";
 
 import "./Login.css";
 
@@ -33,7 +33,7 @@ export default function Login() {
       const user = await loginUser(username, password);
 
       setUser(user);
-      setPeristenceCookie(user);
+      persistUser(user);
       navigate("/");
     } catch (error) {
       setError(error);
