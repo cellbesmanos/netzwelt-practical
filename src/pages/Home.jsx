@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import TeritoryList from "../components/TeritoryList";
+import TeritoryList from "../components/TeritoryList/TeritoryList";
 import useTeritories from "../hooks/useTeritories";
 import extractTeritories from "../utils/extractTeritories";
 

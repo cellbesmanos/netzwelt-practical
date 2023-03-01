@@ -1,0 +1,11 @@
+.Teritory__toggle {
+  display: inline-block;
+  margin-inline-end: 4px;
+  width: 16px;
+  aspect-ratio: 1;
+}
+
+.Teritory__toggle > img {
+  max-width: 100%;
+  vertical-align: middle;
+}

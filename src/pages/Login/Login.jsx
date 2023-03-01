@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { authenticationContext } from "../providers/AuthenticationProvider";
-import loginUser from "../services/loginUser";
+import { authenticationContext } from "../../providers/AuthenticationProvider";
+import loginUser from "../../services/loginUser";
 
 import "./Login.css";
 
