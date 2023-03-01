@@ -41,6 +41,8 @@ export default function Login() {
   return (
     <div className="Login">
       <form className="Login__form" onSubmit={handleSubmit}>
+        {error && <div className="Login__error">{error}</div>}
+
         <label className="Login__input" htmlFor="username">
           <input
             id="username"
