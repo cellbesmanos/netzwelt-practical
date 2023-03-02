@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import { authenticationContext } from "../../providers/AuthenticationProvider";
 import loginUser from "../../services/loginUser";
-import { persistUser } from "../../utils/userPeristence";
+import {
+  checkIfPersistedUserExists,
+  persistUser,
+} from "../../utils/userPeristence";
 
 import "./Login.css";
 
@@ -15,7 +18,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (checkIfPersistedUserExists() || user) {
       navigate("/");
     }
 
