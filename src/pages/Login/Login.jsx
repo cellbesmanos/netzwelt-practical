@@ -67,7 +67,7 @@ export default function Login() {
           <label className="Login__input" htmlFor="password">
             <input
               id="password"
-              type="text"
+              type="password"
               placeholder="Enter your password"
               name="password"
               max={16}
